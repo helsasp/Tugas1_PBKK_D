@@ -21,6 +21,14 @@
 4. Tailwind CSS : framework JavaScript untuk menambahkan interaktivitas ke HTML
 5. Alphine JS :  framework utility-first untuk membangun interface menggunakan kelas-kelas CSS
 
+## Web Routes
+Syntax example :
+```Route::get('/', function () {
+    return view('home', ['title' => 'Home Page']);
+});```
+
+
+
 
 Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
