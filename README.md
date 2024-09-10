@@ -23,9 +23,9 @@
 
 ## Web Routes
 Syntax example :
-```Route::get('/', function () {
+`Route::get('/', function () {
     return view('home', ['title' => 'Home Page']);
-});```
+});`
 
 
 
