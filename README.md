@@ -28,6 +28,12 @@ Route::get('/', function () {
     return view('home', ['title' => 'Home Page']);
 });
 ```
+### Hasil :
+![Screenshot 2024-09-10 150931](https://github.com/user-attachments/assets/b115fd1b-cd44-4e3e-80df-661887937854)
+
+### Penjelasan :
+<p>Routes mengarahkan pengguna ke halaman berbeda berdasarkan URL yang diakses. Sebagai contoh, ketika pertama kali membuka web, user akan berada pada root `/` yang mengarahkan ke halaman `home`. Jika user beralih ke `/about` maka akan diarahkan ke halaman about. </p>
+
 
 
 
