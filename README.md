@@ -13,19 +13,14 @@
 ## NRP : 5025221154
 ## Kelas : D
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Required Tools
+1. Laravel 11 : versi terbaru dari Laravel, framework PHP
+1. Laragon or Laravel Herd : environment untuk menjalankan laravel
+2. PHP (version >= 8.2) : pembuatan aplikasi web
+3. Composer : dependensi PHP untuk mengelola libraries
+4. Tailwind CSS : framework JavaScript untuk menambahkan interaktivitas ke HTML
+5. Alphine JS :  framework utility-first untuk membangun interface menggunakan kelas-kelas CSS
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
 
 Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
