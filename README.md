@@ -7,11 +7,11 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## Tugas Pemrograman Berbasis Kerangka Kerja 1 - Laravel Installation, Folder Structure, Blade, and Component
+# Tugas Pemrograman Berbasis Kerangka Kerja 1 - Laravel Installation, Folder Structure, Blade, and Component
 
-# Nama : Helsa Sriprameswari Putri
-# NRP : 5025221154
-# Kelas : D
+## Nama : Helsa Sriprameswari Putri
+## NRP : 5025221154
+## Kelas : D
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
