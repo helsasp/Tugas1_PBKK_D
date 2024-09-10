@@ -22,10 +22,10 @@
 5. Alphine JS :  framework utility-first untuk membangun interface menggunakan kelas-kelas CSS
 
 ## Web Routes
-Syntax example :
-`Route::get('/', function () { <br>
-    return view('home', ['title' => 'Home Page']); <br>
-});`
+Syntax example : <br>
+```Route::get('/', function () {
+    return view('home', ['title' => 'Home Page']);
+});```
 
 
 
