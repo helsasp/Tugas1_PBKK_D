@@ -29,11 +29,28 @@ npm run dev
 ```
 
 ## Web Routes
-Syntax example : <br>
+### Implementasi : : <br>
 ```
+<?php
+
+use Illuminate\Support\Facades\Route;
+
 Route::get('/', function () {
     return view('home', ['title' => 'Home Page']);
 });
+
+Route::get('/about', function () {
+    return view('about', ['name' => 'Helsa Putri', 'title' => 'About']);
+});
+
+Route::get('/blog', function () {
+    return view('blog', ['title' => 'Blog']);
+});
+
+Route::get('/contact', function () {
+    return view('contact', ['title' => 'Contact']);
+});
+
 ```
 ### Hasil :
 ![Screenshot 2024-09-10 150931](https://github.com/user-attachments/assets/b115fd1b-cd44-4e3e-80df-661887937854)
@@ -74,7 +91,30 @@ rounded-md px-3 py-2 text-sm font-medium" aria-current="{{ $active ? 'page' : fa
 ### Tampilan :
 ![Screenshot 2024-09-11 230354](https://github.com/user-attachments/assets/8021c3fc-0dc7-4094-9274-517e054462eb)
 
+## Home Page
 
+![Screenshot 2024-09-11 232646](https://github.com/user-attachments/assets/5b7e8a9a-16c2-4177-a6df-6902143dcbe8)
+
+
+Home page berada apa root /. Dalam home page terdapat tiga bagian penting, yaitu :
+1. Navbar : navigasi ke halaman home.
+2. Header : Berisi judul ($title) yaitu "Home Page")
+3. Body : Berisi isi text paragraf pada home page
+
+## Implementasi :
+
+```
+<x-layout>
+  <x-slot:title>{{ $title }}</x-slot:title>
+  <h3 class="text-xl">Welcome to Helsa's Home Page! <3</h3>
+  <p>In this home page, you can find some of these menu : </p>
+  <ul>
+    <li>1. Blog</li>
+    <li>2. About</li>
+    <li>3. Contact</li>
+  </ul>
+</x-layout>
+```
 
 
 
