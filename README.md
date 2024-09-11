@@ -96,9 +96,9 @@ rounded-md px-3 py-2 text-sm font-medium" aria-current="{{ $active ? 'page' : fa
 ![Screenshot 2024-09-11 232646](https://github.com/user-attachments/assets/5b7e8a9a-16c2-4177-a6df-6902143dcbe8)
 
 
-Home page berada apa root /. Dalam home page terdapat tiga bagian penting, yaitu :
-1. Navbar : navigasi ke halaman home.
-2. Header : Berisi judul ($title) yaitu "Home Page")
+Home page berada pada root /. Dalam home page terdapat tiga bagian penting, yaitu :
+1. Navbar : Navigasi ke halaman home(/)
+2. Header : Berisi judul ($title) yaitu "Home Page"
 3. Body : Berisi isi text paragraf pada home page
 
 ## Implementasi :
@@ -113,6 +113,25 @@ Home page berada apa root /. Dalam home page terdapat tiga bagian penting, yaitu
     <li>2. About</li>
     <li>3. Contact</li>
   </ul>
+</x-layout>
+```
+
+## About Page
+
+![Screenshot 2024-09-11 233019](https://github.com/user-attachments/assets/a75d78be-9f36-49c3-a29f-78f5cf0baf53)
+
+Home page berada pada /about. Dalam about page terdapat tiga bagian penting, yaitu :
+1. Navbar : Navigasi ke halaman about(/about)
+2. Header : Berisi judul ($title) yaitu "About"
+3. Body : Berisi isi text paragraf dan foto pada halaman about
+
+## Implementasi :
+```
+<x-layout>
+<x-slot:title>{{ $title }}</x-slot:title>
+  <h3 class="text-xl">Welcome to About Me! <3</h3>
+  <p>Hello my name is {{$name}}. I am a third-year undergraduate student majoring in Informatics at Institut Teknologi Sepuluh Nopember. I have a strong interest in web programming and software engineering. With a curious mindset and a passion for learning, I am always eager to expand my knowledge and skills in these fields.</p>
+  <img src="{{ asset('img/helsa.png') }}" alt="Helsa" style="width: 200px; height: 200px;">
 </x-layout>
 ```
 
