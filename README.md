@@ -74,6 +74,17 @@ Jika ingin membuat tanpa clas tambahkan `--view`
 <x-component-name></x-component-name>
 ```
 
+## Header
+Komponen header dalam sebuah template web yang menggunakan Tailwind CSS dan Laravel Blade ({{ $slot }})
+### Implementasi :
+```
+<header class="bg-white shadow">
+    <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+      <h1 class="text-3xl font-bold tracking-tight text-gray-900">{{ $slot }}</h1>
+    </div>
+</header>
+```
+
 ## Navbar 
 ![Screenshot 2024-09-11 230354](https://github.com/user-attachments/assets/8021c3fc-0dc7-4094-9274-517e054462eb)
 Navbar digunakan untuk menyediakan tombol untuk navigasi antar halaman atau bagian dalam situs web. Dalam aplikasi web ini, terdapat 4 halaman, yaitu home,blog,about,dan contact. Navbar dibuat menggunakan Tailwind UI.
