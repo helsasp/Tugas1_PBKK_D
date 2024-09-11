@@ -61,14 +61,15 @@ Jika ingin membuat tanpa clas tambahkan `--view`
 Navbar digunakan untuk menyediakan tombol untuk navigasi antar halaman atau bagian dalam situs web. Dalam aplikasi web ini, terdapat 4 halaman, yaitu home,blog,about,dan contact. Navbar dibuat menggunakan Tailwind UI.
 ### Implementasi :
 ```
-<a {{ $attributes }}class="{{ $active ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium" aria-current="{{ $active ? 'page' : false}}">{{ $slot }}</a>
+<a {{ $attributes }}class="{{ $active ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }}
+rounded-md px-3 py-2 text-sm font-medium" aria-current="{{ $active ? 'page' : false}}">{{ $slot }}</a>
 ```
 
 ```
  <x-nav-link href="/" :active="request()->is('/')">Home</x-nav-link>
-              <x-nav-link href="/blog" :active="request()->is('blog')">Blog</x-nav-link>
-              <x-nav-link href="/about" :active="request()->is('about')">About</x-nav-link>
-              <x-nav-link href="/contact" :active="request()->is('contact')">Contact</x-nav-link>
+ <x-nav-link href="/blog" :active="request()->is('blog')">Blog</x-nav-link>
+ <x-nav-link href="/about" :active="request()->is('about')">About</x-nav-link>
+ <x-nav-link href="/contact" :active="request()->is('contact')">Contact</x-nav-link>
 ```
 ### Tampilan :
 ![Screenshot 2024-09-11 230354](https://github.com/user-attachments/assets/8021c3fc-0dc7-4094-9274-517e054462eb)
