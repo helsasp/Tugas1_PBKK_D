@@ -29,7 +29,7 @@ npm run dev
 ```
 
 ## Web Routes
-### Implementasi : : <br>
+### Implementasi : <br>
 ```
 <?php
 
