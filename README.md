@@ -116,11 +116,30 @@ Home page berada pada root /. Dalam home page terdapat tiga bagian penting, yait
 </x-layout>
 ```
 
+## Blog Page
+
+![Screenshot 2024-09-11 233504](https://github.com/user-attachments/assets/65b3f4be-ba04-4ab1-ae29-5ff596dd34d9)
+
+Blog page berada pada /blog. Dalam blog page terdapat tiga bagian penting, yaitu :
+1. Navbar : Navigasi ke halaman blog(/blog)
+2. Header : Berisi judul ($title) yaitu "Blog"
+3. Body : Berisi daftar blog dan isinya
+
+## Implementasi :
+```
+<x-layout>
+<x-slot:title>{{ $title }}</x-slot:title>
+  <h3 class="text-xl">Welcome to About Me! <3</h3>
+  <p>Hello my name is {{$name}}. I am a third-year undergraduate student majoring in Informatics at Institut Teknologi Sepuluh Nopember. I have a strong interest in web programming and software engineering. With a curious mindset and a passion for learning, I am always eager to expand my knowledge and skills in these fields.</p>
+  <img src="{{ asset('img/helsa.png') }}" alt="Helsa" style="width: 200px; height: 200px;">
+</x-layout>
+```
+
 ## About Page
 
 ![Screenshot 2024-09-11 233019](https://github.com/user-attachments/assets/a75d78be-9f36-49c3-a29f-78f5cf0baf53)
 
-Home page berada pada /about. Dalam about page terdapat tiga bagian penting, yaitu :
+About page berada pada /about. Dalam about page terdapat tiga bagian penting, yaitu :
 1. Navbar : Navigasi ke halaman about(/about)
 2. Header : Berisi judul ($title) yaitu "About"
 3. Body : Berisi isi text paragraf dan foto pada halaman about
