@@ -39,12 +39,23 @@ Route::get('/', function () {
 ![Screenshot 2024-09-10 150931](https://github.com/user-attachments/assets/b115fd1b-cd44-4e3e-80df-661887937854)
 
 ### Penjelasan :
-<p>Routes mengarahkan pengguna ke halaman berbeda berdasarkan URL yang diakses. Sebagai contoh, ketika pertama kali membuka web, user akan berada pada root 
-    ```
-    /
-```
-    yang mengarahkan ke halaman ```home`. Jika user beralih ke `/about` maka akan diarahkan ke halaman about. </p>
+<p>Routes mengarahkan pengguna ke halaman berbeda berdasarkan URL yang diakses. Sebagai contoh, ketika pertama kali membuka web, user akan berada pada root (/) yang mengarahkan ke halaman ```home`. Jika user beralih ke /about maka akan diarahkan ke halaman about. </p>
 
+## Navbar 
+Navbar digunakan untuk menyediakan tombol untuk navigasi antar halaman atau bagian dalam situs web. Dalam aplikasi web ini, terdapat 4 halaman, yaitu home,blog,about,dan contact. Navbar dibuat menggunakan Tailwind UI.
+### Tampilan :
+![Screenshot 2024-09-11 230354](https://github.com/user-attachments/assets/8021c3fc-0dc7-4094-9274-517e054462eb)
+
+## Component
+
+### How to Make?
+```
+php artisan make:component ComponentName
+```
+Akan menghasilkan 2 file, yaitu : 
+1. Blade view component file berada di resources/views/components/component-name.blade.php.
+2. File class berada di app/View/Components/ComponentName.php.
+Jika ingin membuat tanpa clas tambahkan `--view`
 
 
 
