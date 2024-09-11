@@ -75,6 +75,7 @@ Jika ingin membuat tanpa clas tambahkan `--view`
 ```
 
 ## Navbar 
+![Screenshot 2024-09-11 230354](https://github.com/user-attachments/assets/8021c3fc-0dc7-4094-9274-517e054462eb)
 Navbar digunakan untuk menyediakan tombol untuk navigasi antar halaman atau bagian dalam situs web. Dalam aplikasi web ini, terdapat 4 halaman, yaitu home,blog,about,dan contact. Navbar dibuat menggunakan Tailwind UI.
 ### Implementasi :
 ```
@@ -88,9 +89,6 @@ rounded-md px-3 py-2 text-sm font-medium" aria-current="{{ $active ? 'page' : fa
  <x-nav-link href="/about" :active="request()->is('about')">About</x-nav-link>
  <x-nav-link href="/contact" :active="request()->is('contact')">Contact</x-nav-link>
 ```
-### Tampilan :
-![Screenshot 2024-09-11 230354](https://github.com/user-attachments/assets/8021c3fc-0dc7-4094-9274-517e054462eb)
-
 ## Home Page
 
 ![Screenshot 2024-09-11 232646](https://github.com/user-attachments/assets/5b7e8a9a-16c2-4177-a6df-6902143dcbe8)
@@ -101,7 +99,7 @@ Home page berada pada root /. Dalam home page terdapat tiga bagian penting, yait
 2. Header : Berisi judul ($title) yaitu "Home Page"
 3. Body : Berisi isi text paragraf pada home page
 
-## Implementasi :
+### Implementasi :
 
 ```
 <x-layout>
@@ -125,7 +123,7 @@ Blog page berada pada /blog. Dalam blog page terdapat tiga bagian penting, yaitu
 2. Header : Berisi judul ($title) yaitu "Blog"
 3. Body : Berisi daftar blog dan isinya
 
-## Implementasi :
+### Implementasi :
 ```
 <x-layout>
 <x-slot:title>{{ $title }}</x-slot:title>
@@ -144,7 +142,7 @@ About page berada pada /about. Dalam about page terdapat tiga bagian penting, ya
 2. Header : Berisi judul ($title) yaitu "About"
 3. Body : Berisi isi text paragraf dan foto pada halaman about
 
-## Implementasi :
+### Implementasi :
 ```
 <x-layout>
 <x-slot:title>{{ $title }}</x-slot:title>
@@ -153,6 +151,29 @@ About page berada pada /about. Dalam about page terdapat tiga bagian penting, ya
   <img src="{{ asset('img/helsa.png') }}" alt="Helsa" style="width: 200px; height: 200px;">
 </x-layout>
 ```
+
+## Contact Page
+![Screenshot 2024-09-11 234012](https://github.com/user-attachments/assets/e6a20bdc-31a2-44bf-82d2-9911eafd993e)
+
+Contact page berada pada /contact. Dalam contact page terdapat tiga bagian penting, yaitu :
+1. Navbar : Navigasi ke halaman contact(/contact)
+2. Header : Berisi judul ($title) yaitu "Contact"
+3. Body : Berisi list contact
+
+### Implementasi :
+```
+<x-layout>
+<x-slot:title>{{ $title }}</x-slot:title>
+  <h3 class="text-xl">Welcome to Contact Page! <3</h3>
+  <p>Please reach out on one of my social media :</p>
+</x-layout>
+```
+
+## Web Responsivity
+
+![Screenshot 2024-09-11 234341](https://github.com/user-attachments/assets/ca873609-3dc2-47ff-8696-f0d74059c7d0)
+![Screenshot 2024-09-11 234426](https://github.com/user-attachments/assets/a01a65d4-005a-4987-beb3-7cc434a2bec6)
+
 
 
 
