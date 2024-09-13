@@ -7,7 +7,9 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-# Tugas Pemrograman Berbasis Kerangka Kerja 1 - Laravel Installation, Folder Structure, Blade, and Component
+
+# Pemrograman Berbasis Kerangka Kerja - Laravel Tutorial
+# Part 1 - Laravel Installation, Folder Structure, Blade, and Component
 
 ## Nama : Helsa Sriprameswari Putri
 ## NRP : 5025221154
