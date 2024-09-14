@@ -185,7 +185,7 @@ Contact page berada pada /contact. Dalam contact page terdapat tiga bagian penti
 ![Screenshot 2024-09-11 234341](https://github.com/user-attachments/assets/ca873609-3dc2-47ff-8696-f0d74059c7d0)
 ![Screenshot 2024-09-11 234426](https://github.com/user-attachments/assets/a01a65d4-005a-4987-beb3-7cc434a2bec6)
 
-
+# Part 2 - View Data and Model
 
 
 
