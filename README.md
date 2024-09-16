@@ -196,9 +196,9 @@ Contact page berada pada /contact. Dalam contact page terdapat tiga bagian penti
 Route::get('/posts', function () {
     return view('posts', ['title' => 'Blog','posts'=>Post::all()]);
 });
-
-Pada saat user masuk ke halaman post, akan mengembalikan view posts dengan title "Blog" serta posts, yang berisi semua data dari model Post yang diperoleh melalui Post::all().
 ```
+Pada saat user masuk ke halaman post, akan mengembalikan view posts dengan title "Blog" serta posts, yang berisi semua data dari model Post yang diperoleh melalui Post::all().
+
 ## Models 
 
 Membuat models beranama post.php untuk menyimpan data post. Dalam model tersebut terdapat function all yang menyimpan data informasi post. Slug digunakan untuk mengidentifikasi judul artikel ke berapa pada halaman blog yang akan digunakan nanti dalam post 1 dan post 2.
@@ -215,4 +215,16 @@ public static function all(){
     
             ],}
 ```
-        
+## Post Blade 
+<a href="/posts/{{$post['slug']}}" class="hover:underline">
+  <h2 class="mb-1 text-3xl tracking-tight font-bold text-gray-900">{{$post['title']}}</h2>
+  </a>
+<div class="text-base text-gray-500">
+<a href="#">{{$post['author']}}</a> | 3 June 2024
+</div>
+
+<p class ="my-4 font-light">{{Str::limit($post['body'],150)}}</p>
+
+<a href="/posts/{{$post['slug']}}" class="font-medium text-blue-500 hover:underline">Read More &raquo;</a>
+
+Untuk mengisi halaman post yaitu berisi title, author, dan body. Data dari komponen tersebut diperoleh dari array class post yang sudah dibuat.
