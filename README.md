@@ -187,5 +187,32 @@ Contact page berada pada /contact. Dalam contact page terdapat tiga bagian penti
 
 # Part 2 - View Data and Model
 
+## Post
 
+![image](https://github.com/user-attachments/assets/5b1a17ce-e3bf-4ddb-ad0b-a22608dac4cd)
 
+## Route
+```
+Route::get('/posts', function () {
+    return view('posts', ['title' => 'Blog','posts'=>Post::all()]);
+});
+
+Pada saat user masuk ke halaman post, akan mengembalikan view posts dengan title "Blog" serta posts, yang berisi semua data dari model Post yang diperoleh melalui Post::all().
+```
+## Models 
+
+Membuat models beranama post.php untuk menyimpan data post. Dalam model tersebut terdapat function all yang menyimpan data informasi post. Slug digunakan untuk mengidentifikasi judul artikel ke berapa pada halaman blog yang akan digunakan nanti dalam post 1 dan post 2.
+
+```
+public static function all(){
+        return [
+            [
+            'id'=>'1',
+            'slug'=>'judul-artikel-1',
+            'title' => 'Judul Artikel 1',
+            'author' => 'Helsa Putri',
+            'body'=> 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel repellat temporibus dicta consectetur necessitatibus asperiores, placeat eum rem id natus, expedita blanditiis aliquam aspernatur porro delectus, fuga architecto? Aliquid, dolore!',
+    
+            ],}
+```
+        
