@@ -187,17 +187,17 @@ Contact page berada pada /contact. Dalam contact page terdapat tiga bagian penti
 
 # Part 2 - View Data and Model
 
-## Post
+## Posts
 
 ![image](https://github.com/user-attachments/assets/5b1a17ce-e3bf-4ddb-ad0b-a22608dac4cd)
 
 ## Route
+Pada saat user masuk ke halaman post, akan mengembalikan view posts dengan title "Blog" serta posts, yang berisi semua data dari model Post yang diperoleh melalui Post::all().
 ```
 Route::get('/posts', function () {
     return view('posts', ['title' => 'Blog','posts'=>Post::all()]);
 });
 ```
-Pada saat user masuk ke halaman post, akan mengembalikan view posts dengan title "Blog" serta posts, yang berisi semua data dari model Post yang diperoleh melalui Post::all().
 
 ## Models 
 
@@ -216,6 +216,9 @@ public static function all(){
             ],}
 ```
 ## Post Blade 
+Untuk mengisi halaman post yaitu berisi title, author, dan body. Data dari komponen tersebut diperoleh dari array class post yang sudah dibuat.
+
+```
 <a href="/posts/{{$post['slug']}}" class="hover:underline">
   <h2 class="mb-1 text-3xl tracking-tight font-bold text-gray-900">{{$post['title']}}</h2>
   </a>
@@ -226,5 +229,5 @@ public static function all(){
 <p class ="my-4 font-light">{{Str::limit($post['body'],150)}}</p>
 
 <a href="/posts/{{$post['slug']}}" class="font-medium text-blue-500 hover:underline">Read More &raquo;</a>
+```
 
-Untuk mengisi halaman post yaitu berisi title, author, dan body. Data dari komponen tersebut diperoleh dari array class post yang sudah dibuat.
