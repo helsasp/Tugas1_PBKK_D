@@ -238,7 +238,7 @@ Untuk mengisi halaman post yaitu berisi title, author, dan body. Data dari kompo
 # Single Post
 
 ![image](https://github.com/user-attachments/assets/f960b8ed-26e0-4930-bca7-9ed8ad9df4a0)
-![image](https://github.com/user-attachments/assets/216ce6b4-5780-49d1-b583-8342de7a0440)
+![image](https://github.com/user-attachments/assets/4c267db9-bb1d-40b3-92dc-dd3d034d1524)
 
 Single post berisi artikel masing - masing post (artikel 1 dan 2).
 
