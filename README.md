@@ -276,7 +276,7 @@ Menampilkan informasi/data yang mencakup title,author,body dari  masing-masing h
 
 Error page muncul ketika user mencoba masuk ke halaman artikel yang tidak existing.
 
-![image](https://github.com/user-attachments/assets/69a69f02-0c7c-434b-ad08-0006cdd9cfa3)
+![image](https://github.com/user-attachments/assets/c00e94a6-6a83-4f47-b03a-6e376339f387)
 
 ## Models
 
