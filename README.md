@@ -191,6 +191,7 @@ Contact page berada pada /contact. Dalam contact page terdapat tiga bagian penti
 
 ![image](https://github.com/user-attachments/assets/5b1a17ce-e3bf-4ddb-ad0b-a22608dac4cd)
 
+Halaman post berisi list dari semua artikel.
 
 ## Models 
 
@@ -241,3 +242,47 @@ Untuk mengisi halaman post yaitu berisi title, author, dan body. Data dari kompo
 
 Single post berisi artikel masing - masing post (artikel 1 dan 2).
 
+## Models 
+
+Terdapat fungsi find untuk mencari halaman post (post berapa) berdasarkan slug.
+```
+ public static function find($slug): array {
+        $post = Arr::first(static::all(), function ($post) use ($slug) {
+            return $post['slug'] == $slug;}); }}
+```
+
+## Route
+
+Untuk menampilkan masing - masing halaman post. Contohnya halaman http://127.0.0.1:8000/posts/judul-artikel-1 akan halaman artikel 1.
+```
+Route::get('/posts/{slug}',function($slug)
+{
+        $post = Post::find($slug);
+          return view('post',['title'=>'Single Post', 'post'=> $post]);
+
+});
+```
+
+## Post Blade 
+
+Menampilkan informasi/data yang mencakup title,author,body dari  masing-masing halaman post/artikel.
+```
+<h2 class="mb-1 text-3xl tracking-tight font-bold text-gray-900">{{$post['title']}}</h2>
+<a href="#">{{$post['author']}}</a> | 3 June 2024
+<p class ="my-4 font-light">{{($post['body'])}}</p>
+<a href="/posts" class="font-medium text-blue-500 hover:underline">&laquo; Back to posts</a>
+```
+# Error Page 
+
+Error page muncul ketika user mencoba masuk ke halaman artikel yang tidak existing.
+
+![image](https://github.com/user-attachments/assets/69a69f02-0c7c-434b-ad08-0006cdd9cfa3)
+
+## Models
+
+Jika halaman artikel tidak ditemukan, page akan menampilkan pesan error 404.
+```
+ if(! $post) {
+            abort(404);
+        }
+```
