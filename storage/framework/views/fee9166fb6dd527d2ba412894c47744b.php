@@ -58,4 +58,4 @@
   </main>
 </div>
 </body>
-</html><?php /**PATH C:\laragon\www\laravel11\resources\views/components/layout.blade.php ENDPATH**/ ?>
+</html><?php /**PATH C:\laragon\www\laravel12\resources\views/components/layout.blade.php ENDPATH**/ ?>

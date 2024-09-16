@@ -238,4 +238,4 @@
         </div>
       </div>
     </div>
-  </nav><?php /**PATH C:\laragon\www\laravel11\resources\views/components/navbar.blade.php ENDPATH**/ ?>
+  </nav><?php /**PATH C:\laragon\www\laravel12\resources\views/components/navbar.blade.php ENDPATH**/ ?>
