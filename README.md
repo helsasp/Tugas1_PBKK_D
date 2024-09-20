@@ -9,11 +9,12 @@
 
 
 # Pemrograman Berbasis Kerangka Kerja - Laravel Tutorial
-# Part 1 - Laravel Installation, Folder Structure, Blade, and Component
 
 ## Nama : Helsa Sriprameswari Putri
 ## NRP : 5025221154
 ## Kelas : D
+
+# Part 1 - Laravel Installation, Folder Structure, Blade, and Component
 
 ### Required Tools
 1. Laravel 11 : versi terbaru dari Laravel, framework PHP
