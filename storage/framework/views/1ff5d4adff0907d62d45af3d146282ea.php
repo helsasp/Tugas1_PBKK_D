@@ -9,6 +9,7 @@
 <?php endif; ?>
 <?php $component->withAttributes([]); ?>
  <?php $__env->slot('title', null, []); ?> <?php echo e($title); ?> <?php $__env->endSlot(); ?>
+
  
 <?php $__currentLoopData = $posts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $post): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 <article class="py-8 max-w-screen-md border-b border-gray-300">
@@ -18,7 +19,8 @@
   
 
 <div class="text-base text-gray-500">
-<a href="#"><?php echo e($post['author']); ?></a> | 3 June 2024
+<a href="#"><?php echo e($post['author']); ?></a> | <?php echo e($post->created_at->diffForHumans()); ?>
+
 </div>
 
 <p class ="my-4 font-light"><?php echo e(Str::limit($post['body'],150)); ?></p>

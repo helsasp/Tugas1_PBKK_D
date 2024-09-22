@@ -287,3 +287,153 @@ Jika halaman artikel tidak ditemukan, page akan menampilkan pesan error 404.
             abort(404);
         }
 ```
+
+# Part 3 -  Database & Migration AND Eloquent ORM & Post Model
+
+# Database & Migration
+
+## Connecting SQLite to TablePlus
+
+Dalam file .env set jadi :
+```
+DB_CONNECTION=sqlite
+```
+Membuat connection di TablePlus dengan menghubungkan connection ke
+
+C:\laragon\www\laravel11\database\database.sqlite 
+
+![image](https://github.com/user-attachments/assets/85c66aae-dd7f-4051-bd9a-9dc44c0e5bfe)
+
+Run migration untuk create table :
+
+```
+php artisan migrate
+```
+
+![image](https://github.com/user-attachments/assets/91393711-dbcb-47ac-a6ea-6646d4c277a9)
+
+Jika ingin menghubungkan ke mysql bisa juga dengan setting port,username,database dll.
+
+## Making Migration of Posts Table
+
+```
+php artisan make :: migration
+create_posts_table
+```
+
+Buat entitasnya :
+
+```
+Schema::create('posts', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->string('author');
+            $table->string('slug')->unique();
+            $table->string('body');
+            $table->timestamps();
+        });
+```
+
+![image](https://github.com/user-attachments/assets/2b274059-0a1c-4412-ab9e-3c342516174a)
+
+Jika ingin Re-migrate
+
+```
+php artisan migrate::fresh
+php artisan migrate
+```
+
+# Eloquent ORM & Post Model
+
+## Updating post model 
+mewarisi model yang ada dalam laravel
+
+```
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Post extends Model
+{
+    use HasFactory;
+    protected $fillable = ['title', 'author', 'slug', 'body'];
+}
+```
+
+Jika mau mengubah slug menjadi id bisa dengan binding
+
+```
+Route::get('/posts/{post:id}',function(Post $id)
+{
+   
+
+       $post = Post::find($id); } 
+
+ ```
+
+ Bisa juga tetap pakai slug 
+
+```
+ Route::get('/posts/{post:slug}',function(Post $post)
+{
+
+            return view('post',['title'=>'Single Post', 'post'=> $post]);
+
+});
+
+```
+
+## Inserting data to row with PHP Tinker
+
+Pada terminal :
+```
+php artisan tinker
+```
+
+```
+App\Models\Post::create([
+'title' => 'Judul Tulisan 1',
+'author'=> 'Helsa Putri',
+'slug' => 'judul-tulisan-1',
+'body' => 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat aliquid tempora dolorem illo sed quaerat impedit, odio repudiandae dicta molestias, amet iure labore voluptatibus? Odio soluta obcaecati ab deserunt dolorem.'
+]);
+```
+
+![image](https://github.com/user-attachments/assets/13744c07-2342-49ad-b16b-f6e46e87de52)
+
+![Screenshot (582)](https://github.com/user-attachments/assets/21ae8586-d723-4637-bc7a-93d5a6c2be5b)
+![Screenshot (583)](https://github.com/user-attachments/assets/2e605f39-b49e-46cb-bc84-9d9c715bbaf1)
+![Screenshot (584)](https://github.com/user-attachments/assets/08be888f-f2cd-4634-b356-40d7057066c4)
+
+## Customizing Time
+
+Jadi user bisa lihat kapan terakhir update
+```
+
+{{$post->created_at->diffForHumans()}}
+
+```
+
+## Making 5 Customized Blogs
+
+
+![Screenshot (585)](https://github.com/user-attachments/assets/39424d28-14c5-431f-89ac-ab6369d27acd)
+
+![Screenshot (586)](https://github.com/user-attachments/assets/a5e04917-1375-482c-97aa-b7cc84f58ecd)
+
+
+```
+php artisan tinker
+
+```
+
+
+```
+App\Models\Post::create([
+'title' => 'Komputasi Awan: Solusi Penyimpanan dan Pemrosesan Data Modern',
+'author'=> 'Helsa Putri',
+'slug' => 'judul-blog-5',
+'body' => 'Komputasi awan telah menjadi tulang punggung bagi banyak layanan digital saat ini. Dengan cloud computing, perusahaan tidak lagi perlu mengelola infrastruktur fisik yang kompleks untuk penyimpanan dan pemrosesan data. Layanan seperti AWS, Google Cloud, dan Microsoft Azure menawarkan skalabilitas, keamanan, dan fleksibilitas yang memungkinkan bisnis untuk fokus pada inovasi tanpa khawatir tentang infrastruktur.'
+]);
+
+```
