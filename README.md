@@ -288,8 +288,7 @@ Jika halaman artikel tidak ditemukan, page akan menampilkan pesan error 404.
         }
 ```
 
-# Part 3 -  Database & Migration AND Eloquent ORM & Post Model
-
+# Part 3 - Database & Migration AND Eloquent ORM & Post Model
 # Database & Migration
 
 ## Connecting SQLite to TablePlus
@@ -349,7 +348,6 @@ php artisan migrate
 mewarisi model yang ada dalam laravel
 
 ```
-
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -368,7 +366,6 @@ Route::get('/posts/{post:id}',function(Post $id)
    
 
        $post = Post::find($id); } 
-
  ```
 
  Bisa juga tetap pakai slug 
@@ -380,7 +377,6 @@ Route::get('/posts/{post:id}',function(Post $id)
             return view('post',['title'=>'Single Post', 'post'=> $post]);
 
 });
-
 ```
 
 ## Inserting data to row with PHP Tinker
@@ -409,9 +405,7 @@ App\Models\Post::create([
 
 Jadi user bisa lihat kapan terakhir update
 ```
-
 {{$post->created_at->diffForHumans()}}
-
 ```
 
 ## Making 5 Customized Blogs
@@ -424,7 +418,6 @@ Jadi user bisa lihat kapan terakhir update
 
 ```
 php artisan tinker
-
 ```
 
 
@@ -435,5 +428,254 @@ App\Models\Post::create([
 'slug' => 'judul-blog-5',
 'body' => 'Komputasi awan telah menjadi tulang punggung bagi banyak layanan digital saat ini. Dengan cloud computing, perusahaan tidak lagi perlu mengelola infrastruktur fisik yang kompleks untuk penyimpanan dan pemrosesan data. Layanan seperti AWS, Google Cloud, dan Microsoft Azure menawarkan skalabilitas, keamanan, dan fleksibilitas yang memungkinkan bisnis untuk fokus pada inovasi tanpa khawatir tentang infrastruktur.'
 ]);
+```
+
+# Part 4 - Model Factories, Eloquent Relationship, Post Category, and Database Seeder
+
+![Screenshot (594)](https://github.com/user-attachments/assets/0fa1ab24-e2f3-43a7-a680-fd4a96708567)
+![image](https://github.com/user-attachments/assets/b139ca4f-6a70-4997-a618-0680574c43bb)
+
+
+# Generating Dummy Data with Factories
+
+Dalam halaman blog, membuat 200 data secara auto dengan model factories.
+
+## Making new factory
 
 ```
+php artisan make:factory
+PostFactory
+```
+
+Dalam PostFactory.php :
+
+Import :
+```
+use Illuminate\Database\Eloquent\Factories\Factory;
+```
+```
+ public function definition(): array
+    {
+        return [
+            'title'=>fake()->sentence(),
+            'author'=>fake()->name(),
+            'slug' => Str::slug(fake() -> sentence()),
+            'body'=> fake()->text()
+
+        ]; }
+```
+Membuat array yang berisi title,author,slug,body yang akan diisi atau digenerate datanya nanti.
+
+## Creating dummy data with tinker
+
+Jika ingin customized data sesuai negara Indonesia bisa diset dalam .env menjadi :
+
+```
+APP_FAKER_LOCALE=id_ID
+```
+
+Masuk ke tinker :
+```
+php artisan tinker
+```
+```
+App\Models\Post:factory(200)->create();
+```
+
+200 dummy data blog akan tergenerate.
+
+# Eloquent Relationship
+
+## Menghubungkan dua tabel, yaitu users dan post 
+```
+ $table -> foreignId('author_id')->constrained(
+                table: 'users',
+                indexName : 'posts_author_id'
+            );
+```
+
+Dalam migrations create posts, menambahkan constraint foreign key di table posts, yaitu author_id yang berhubungan dengan id di tabel users.
+
+## Generate data users dan posts
+
+Database dibuat agar setiap author/user memiliki beberapa posts. Dalam model Post tambahkan :
+
+```
+php artisan serve
+```
+
+```
+App\Models\Post::factory(100)->recycle(User::factory(5))->create())->create();
+```
+
+Artinya akan generate data yang hanya ada 5 authors dengan total 100 posts. Agar dari post yang ada kita bisa tahu data authornya maka membuat fungsi : 
+
+
+```
+ public function author(): BelongsTo {
+        return $this->belongsTo(User::class);
+    }
+```
+
+## Fixing UI
+
+![image](https://github.com/user-attachments/assets/0d3a7995-3d60-4153-98b8-e9ed8db2b0f4)
+![image](https://github.com/user-attachments/assets/5980b169-5ae3-4eb8-a351-a775feef1c8f)
+![image](https://github.com/user-attachments/assets/cf9a877c-d952-42ba-aea5-22a3f37fbc57)
+
+
+Dalam halaman blog, user dapat mengkategorikan list post sesuai usernya. Jika user click nama authornya, website akan menampilkan "authors by *nama*" sesuai authornya. Di bawah title blog, terdapat juga tulisan by author in framework programming.
+
+Updating Route : 
+```
+Route::get('/authors/{user}',function(User $user)
+{
+
+            return view('posts',['title'=>'Articles by ' . $user->name, 'posts'=> $user->posts]);
+
+});
+```
+
+Updating Post blade
+```
+By  
+<a href="/authors/{{$post->author->id}}" class="hover:underline">{{$post->author->name}}</a> 
+in <a href="#">Framework Programming </a>| {{$post->created_at->diffForHumans()}}
+</div>
+```
+
+# Post Category
+
+Dalam part ini akan membuat agar dapat menampilkan posts sesuai category.
+
+Membuat migration, model, dan factory category 
+
+```
+php artisan make:model Category -mf
+```
+## Migrations 
+Membuat entitas yang ada di tabel category pada migrations dengan foreign key yang menghubungkan category id
+
+```
+ Schema::create('categories', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('slug')->unique;
+            $table->timestamps();
+        });
+```
+Pada migrations posts:
+```
+  $table -> foreignId('category_id')->constrained(
+                table: 'categories',
+                indexName : 'posts_category_id'
+            );
+```
+## Models
+
+Menghubungkan category dengan posts dimana suatu category dapat memiliki banyak posts.
+
+Category model :
+
+```
+ public function posts() : HasMany {
+    return $this -> hasMany(Post::class);
+    }
+```
+
+Posts model : 
+
+```
+public function category(): BelongsTo {
+        return $this->belongsTo(Category::class);
+    }
+```
+
+## Factories
+
+Untuk generate dummy data category nantinya 
+```
+ return [
+            'name'=> fake()->sentence(rand(1,2),false),
+            'slug'=> Str::slug(fake()->sentence(rand(1,2),false)),
+        ];
+```
+## Generating Categories Data
+```
+App\Models\Post::factory(100)->recycle([Category:factory(3)->create(), User::factory(5)->create()]) -> create();
+```
+
+Laravel akan mengenerate 3 categories dengan 5 authors
+
+## UI
+
+![image](https://github.com/user-attachments/assets/96bff86e-517a-4517-b8ba-75a0c746d20b)
+![image](https://github.com/user-attachments/assets/7abcd749-db93-4ec3-8320-f442fde7a8b7)
+
+Halaman web bisa menampilkan keterangan post dengan category nya. Jika nama category diklik, maka akan menampilkan nama kategori tersebut dan jumlah postnya
+
+Adding Route :
+```
+Route::get('/categories/{category:slug}',function(Category $category)
+{
+
+            return view('posts',['title'=> 'Articles in : ' . $category->name, 'posts'=> $category->posts]);
+
+});
+```
+# Database Seeder
+
+Membuat seeder agar dapat memasukkan data lebih mudah dan sesuai keinginan kita
+
+```
+php artisan make:seeder
+```
+
+## User Seeder
+```
+ User::create([
+            'name' => 'Helsa Putri',
+            'username'=> 'helsasp',
+           'email' => 'helsasp@gmail.com',
+               'email_verified_at'=> now(),
+               'password'=> Hash::make('password'),
+               'remember_token'=>Str::random(10)
+          ]);
+        User::factory(5)->create();
+```
+
+Membuat user seeder untuk menambahkan author sesuai data kita pribadi
+
+## Category Seeder
+```
+ Category::create([
+            'name' => 'Web Design',
+            'slug' => 'web-design'
+        ]);
+```
+
+Membuat category seeder untuk menambahkan nama category sesuai yang kita mau
+
+## Database Seeder
+
+```
+$this->call([CategorySeeder::class, UserSeeder::class]);
+      Post::factory(100)->recycle([
+       Category::all(),
+       User::all()
+      ])->create();
+```
+
+Database seeder dibuat dengan memanggil category dan user seeder yang telah dibuat. Menggunakan factory agar bisa mengenerate 100 data dengan recycle.
+
+
+## UI
+
+![image](https://github.com/user-attachments/assets/827843dd-e885-4487-803a-8543f8a3b4dc)
+![image](https://github.com/user-attachments/assets/f477ece4-3063-424a-bd1a-40245bde8ede)
+![image](https://github.com/user-attachments/assets/50e38ba5-bf26-4274-9a17-1358e45a4e4b)
+
+Website dapat menampilkan list blog yang sudah dikelompokkan berdasarkan nama category yang telah kita buat di seeder tadi.
+
+  
+
