@@ -677,5 +677,144 @@ Database seeder dibuat dengan memanggil category dan user seeder yang telah dibu
 
 Website dapat menampilkan list blog yang sudah dikelompokkan berdasarkan nama category yang telah kita buat di seeder tadi.
 
-  
+# Part 5 - N + 1 Problem, Redesign UI, Searching, Pagination
 
+# N + 1 Problem
+
+Dengan data yang sudah diinsert sebelumnya, looping query dilakukan berkali - kali hingga terbentuk banyak sekali query sejumlah 2n + 1. Agar query lebih efektif, dapat menggunakan eager loading dalam laravel.
+
+# Eager Loading by Default
+```
+protected $with = ['author', 'category'];
+```
+
+To prevent lazy loading tambahkan method di AppServiceProvider :
+```
+ public function boot(): void
+    {
+        Model::preventLazyLoading();
+    }
+```
+
+![image](https://github.com/user-attachments/assets/2e14d198-003f-4193-8260-22750ae88d26)
+![image](https://github.com/user-attachments/assets/f32d96fb-330d-4d61-9fe3-20490ef30ab4)
+
+
+Dengan eager loading, query yang sebelumnya berjumlah sangat besar di angka 200 menjadi lebih efektif jumlahnya jadi 6/7.
+
+# Redesign UI
+
+## Using flowbite as UI template
+
+```
+npm install -D flowbite
+```
+In tailwind.config.js add plugins :
+```
+require('flowbite/plugin')
+```
+
+# Posts UI
+
+![image](https://github.com/user-attachments/assets/b9134a6b-5ad8-445f-8c9c-e55ba9104b59)
+![image](https://github.com/user-attachments/assets/0e852bd3-70a0-4917-8981-87c7d3f579be)
+
+Menggunakan blog sections yang ada di flowbite. Caranya adalah copy code nya lalu di implementasikan di posts.blade. Data ditampilkan dengan memanggil $post->category->name, $post -> author->name, dan lainnya. Setiap categori dikelompokkan berdasarkan warna dengan konfigurasi safelist di tailwind.config.js :
+
+```
+ safelist : ["bg-red-100", "bg-green-100", "bg-yellow-100", "bg-blue-100"]
+```
+
+Jika nama category diklik maka akan perpindah ke halaman yang menunjukkan post dengan category yang sama (group by category)
+
+# Single Post UI
+![image](https://github.com/user-attachments/assets/1d555b6b-fa06-4102-974f-c95c14f5e432)
+
+Menggunakan blog templates yang ada di flowbite diimplementasikan di post.blade.php. Halaman akan menunjukan data yang berisi judul,author dll yang dipanggil dari $post -> title dan lainnya. Jika diklik back to posts, akan kembali ke halaman posts. Konfigurasi di tailwind.config.js add plugins :
+```
+require('flowbite-typography')
+```
+# Searching
+
+![image](https://github.com/user-attachments/assets/4a27e4a4-ba2c-4bca-9bc1-f542949ee515)
+
+Mengganti icon search dengan icon yang ada di flowbite. Untuk mengimplementasikan fungsi search, akan digunakan query builder.
+
+## Query Builder
+
+```
+ public function scopeFilter (Builder $query, array $filters): void {
+
+        $query->when(
+            $filters['search'] ?? false, 
+            fn ($query, $search) => 
+            $query->where ('title', 'like', '%' . $search . '%')
+        )
+      ; }
+```
+
+Fungsi tersebut digunakan untuk memfilter suatu title pada bagian searching blog. Selain itu, juga membuat filter berdasarkan category dan author. Jika array tidak kosong, maka akan memfilter melalui query yang ada.
+
+## Updating Route
+
+```
+Route::get('/posts', function () {
+
+ 
+    return view('posts', ['title' => 'Blog','posts'=>Post::filter(request(['search', 'category','author']))->latest()->get()]);
+
+});
+```
+
+Route akan mengembalikan view sesuai filter yang sudah dibuat tadi,
+
+```
+  @if(request('category'))
+            <input type="hidden" name="category" value ="{{ request('category')}}">
+            @endif
+```
+
+Jika terdapat request filter berdasar category maupun authornya, post dengan category atau author yang tidak sesuai akan diset hidden.
+
+## Not Found
+
+![image](https://github.com/user-attachments/assets/dd1b2d90-2543-4339-b81c-4e73ff79980b)
+
+Jika blog tidak ditemukan, akan menampilkan tulisan article not found.
+
+```
+@empty
+<div>
+<p class="font-semibold text-xl my-4">Article Not Found!</p>
+<a href="/posts" class ="block text-blue-600 hover:underline"> &laquo; Back to all posts</a>
+
+</div>
+```
+## Query
+
+![image](https://github.com/user-attachments/assets/0161bf22-3fb8-4966-8f41-9722578c469a)
+
+# Pagination
+
+![image](https://github.com/user-attachments/assets/90a97ddd-1c52-492c-b152-8279089d4092)
+![image](https://github.com/user-attachments/assets/2274a612-d353-4bcd-8017-27fd60a4d565)
+![image](https://github.com/user-attachments/assets/d9b5d460-8c22-41f4-bbe1-8d42a4d0cd5d)
+
+Dengan pagination yang ada di laravel, blog akan dikelompokkan per page sesuai banyak post yang diinginkan developer. Pagination juga mengelompokkan berdasarkan category dan authornya.
+
+Configuration in Laravel (content) :
+```
+"./vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php",
+```
+
+Dalam router posts :
+```
+ return view('posts', ['title' => 'Blog','posts'=>Post::filter(request(['search', 'category','author']))->latest()->paginate(9)->withQueryString()]);
+ ```
+
+ Bisa juga menggunakan simplepaginate jika ingin ada previous dan nextnya.
+
+ Dalam view post blade :
+ ```
+   {{ $posts->links()}}
+ ```
